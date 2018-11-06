@@ -2,6 +2,12 @@ package aplicacao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import entities.Funcionario;
 
 /*
  * Programa que lê os dados (nome, email e salário) de funcionários 
@@ -23,13 +29,17 @@ public class Programa {
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			
 			String linha = br.readLine();
+			List<Funcionario> lista = new ArrayList<>();
 			
 			while(linha != null) {
 				String[] campos = linha.split(",");
-				System.out.println(campos[1]);
+				lista.add(new Funcionario(campos[0],campos[1],Double.parseDouble(campos[2])));
 				
 				linha = br.readLine();
 			}
+			
+			Stream<Funcionario> st1 = lista.stream(); 
+			System.out.println(Arrays.toString(st1.toArray()));
 			
 		} catch (Exception e) {
 			System.out.println("Erro: "+e.getMessage());
