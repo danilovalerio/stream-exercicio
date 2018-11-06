@@ -25,7 +25,8 @@ public class Programa {
 			String linha = br.readLine();
 			
 			while(linha != null) {
-				System.out.println("teste");
+				String[] campos = linha.split(",");
+				System.out.println(campos[1]);
 				
 				linha = br.readLine();
 			}
