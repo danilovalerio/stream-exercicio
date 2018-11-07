@@ -42,28 +42,24 @@ public class Programa {
 			
 			//Exibe o conteúdo do arquivo 
 			Stream<Funcionario> st1 = lista.stream(); 
-			//System.out.println(Arrays.toString(st1.toArray()));
-			
-			
-			
-			//Mostrar em ordem alfabética
+			System.out.println(Arrays.toString(st1.toArray()));
+						
+			//Mostrar em ordem alfabética e com salário acima do critério fornecido
 			List<String> funcs = lista.stream()
-					.filter(f -> f.getSalario() > salCriterio)
-					.map(f ->f.getNome() +" - "+ f.getEmail() + " - " + f.getSalario())
-					.sorted((f1, f2) -> f1.toUpperCase().compareTo(f2.toUpperCase()))
-					.collect(Collectors.toList());
+					.filter(f -> f.getSalario() > salCriterio) //filtra salário acima de salCriterio
+					.map(f ->f.getNome() +" - "+ f.getEmail() + " - " + f.getSalario())//aplica lambda que dá um get nos dados
+					.sorted((f1, f2) -> f1.toUpperCase().compareTo(f2.toUpperCase()))//ordena com um Comparator
+					.collect(Collectors.toList());//converte novamente o Stream para uma lista
 			
-			funcs.forEach(System.out::println);
+			funcs.forEach(System.out::println); //Exibe a lista usando como referência o método println
 			
 			System.out.println("Soma dos salário de quem começa com a letra 'M':");
-			
 			double somaSal = lista.stream()
-					.filter(f -> f.getNome().charAt(0) == 'M')
-					.map(f -> f.getSalario())
-					.reduce(0.0, (x,y) -> x + y); 
+					.filter(f -> f.getNome().charAt(0) == 'M')//filtra pelos nomes que iniciam com a letra M
+					.map(f -> f.getSalario()) //com a expressão lambda pega o salario de cada item
+					.reduce(0.0, (x,y) -> x + y);  //encontra valores concatenados ou cumulativos
 			System.out.println("Soma dos salários: R$ "+ String.format("%.2f", somaSal) );
 					
-			
 		} catch (Exception e) {
 			System.out.println("Erro: "+e.getMessage());
 		}
